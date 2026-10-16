@@ -1,0 +1,14 @@
+﻿@using System.Text.RegularExpressions
+
+<input type="text" title="Please enter an integer number." @bind="input" @bind:event="oninput" @oninput="inputChange" />
+
+@code {
+    private string input = string.Empty;
+
+    private void inputChange(ChangeEventArgs e)
+    {
+        Regex nondigit = new Regex(@"[^\d]");
+
+        this.input = nondigit.Replace(e.Value.ToString(), string.Empty);
+    }
+}

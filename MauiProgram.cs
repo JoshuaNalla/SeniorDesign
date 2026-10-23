@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Emgu.CV;
+using Microsoft.Extensions.Logging;
+using SeniorDesign.ImageProcessing;
 
 namespace SeniorDesign
 {

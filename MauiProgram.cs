@@ -1,6 +1,4 @@
-﻿using Emgu.CV;
-using Microsoft.Extensions.Logging;
-using SeniorDesign.ImageProcessing;
+﻿using Microsoft.Extensions.Logging;
 
 namespace SeniorDesign
 {
@@ -17,10 +15,11 @@ namespace SeniorDesign
                 });
 
             builder.Services.AddMauiBlazorWebView();
+            builder.Services.AddBlazorBootstrap();
 
 #if DEBUG
-    		builder.Services.AddBlazorWebViewDeveloperTools();
-    		builder.Logging.AddDebug();
+            builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

@@ -1,6 +1,6 @@
 ﻿using Emgu.CV;
 
-namespace SeniorDesign.ImageProcessing
+namespace SeniorDesign.src.ImageProcessing
 {
     internal interface IImageProcessor
     {

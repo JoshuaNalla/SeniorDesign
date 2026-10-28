@@ -4,7 +4,7 @@ using Emgu.CV.ImgHash;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
 
-namespace SeniorDesign.ImageProcessing
+namespace SeniorDesign.src.ImageProcessing
 {
     internal class ImageProcessor : IImageProcessor
     {
@@ -128,7 +128,7 @@ namespace SeniorDesign.ImageProcessing
         /// <returns></returns>
         private double GetDistance(System.Drawing.Point p1, System.Drawing.Point p2)
         {
-            Utils.ThrowIfNull([p1, p2]);
+            Utils.ThrowIfNull(p1, p2);
 
             double diff1 = p1.X - p2.X;
             double diff2 = p1.Y - p2.Y;

@@ -67,6 +67,8 @@
 
     <ItemGroup>
       <Folder Include="DataAndDebug\Photos\" />
+      <Folder Include="src\Data API\" />
+      <Folder Include="src\VideoCollection\" />
 	</ItemGroup>
 
 </Project>

@@ -4,6 +4,39 @@
 <h3>Home</h3>
 <NumberBox></NumberBox>
 
-@code {
+<h1>Courtside</h1>
+<div class="row">
+    <div class="col">
+        <button class="btn btn-primary" @onclick="DoImageProcessing">Do Image Processing</button>
+    </div>
+    <div class="col">
+        <span>Velocity: @(velocity)</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <button class="btn btn-primary" @onclick="DoSensorConnection">Do Sensor Connection</button>
+    </div>
+    <div class="col">
+        <span>Connected: @((isConnected ? "" : "Not ") + "Connected")</span>
+    </div>
+</div>
 
+@code{
+    private double velocity = 0.0;
+    private bool isConnected = false;
+
+    private void DoImageProcessing()
+    {
+        using (VideoCapture capture = new(@"C:\Users\mitch\source\repos\SeniorDesign\DataAndDebug\videoplayback2.mp4"))
+        {
+            IImageProcessor processor = new ImageProcessor();
+            velocity = processor.GetBallSpeed(capture);
+        }
+    }
+
+    private void DoSensorConnection()
+    {
+        
+    }
 }

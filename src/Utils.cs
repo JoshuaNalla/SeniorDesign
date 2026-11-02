@@ -12,7 +12,7 @@ namespace SeniorDesign.src
         /// Throws an error if an object is null.
         /// </summary>
         /// <param name="args"></param>
-        public static void ThrowIfNull(params object[] args)
+        public static void ErrorIfNull(params object[] args)
         {
             foreach (object arg in args)
             {

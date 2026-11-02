@@ -21,7 +21,7 @@ namespace SeniorDesign.src.ImageProcessing
         /// <returns></returns>
         public double GetBallSpeed(VideoCapture capture)
         {
-            Utils.ThrowIfNull(capture);
+            Utils.ErrorIfNull(capture);
 
             ClearImages();
 
@@ -51,7 +51,7 @@ namespace SeniorDesign.src.ImageProcessing
         /// <returns></returns>
         private Mat ProcessFrame(Mat frame)
         {
-            Utils.ThrowIfNull(frame);
+            Utils.ErrorIfNull(frame);
 
             CvInvoke.CvtColor(frame, frame, Emgu.CV.CvEnum.ColorConversion.Bgr2Gray);
             SaveImage(frame, $"grayscale_{counter++}");
@@ -69,7 +69,7 @@ namespace SeniorDesign.src.ImageProcessing
         /// <returns></returns>
         private VectorOfPoint FindCircularContour(Mat frame)
         {
-            Utils.ThrowIfNull(frame);
+            Utils.ErrorIfNull(frame);
 
             VectorOfPoint returnContour = new();
             double returnContourRoundness = 0.0;
@@ -107,7 +107,7 @@ namespace SeniorDesign.src.ImageProcessing
         /// <returns></returns>
         private System.Drawing.Point FindContourPosition(VectorOfPoint contour)
         {
-            Utils.ThrowIfNull(contour);
+            Utils.ErrorIfNull(contour);
 
             System.Drawing.Point contourPosition = new System.Drawing.Point();
             Moments moments = CvInvoke.Moments(contour, true);
@@ -128,7 +128,7 @@ namespace SeniorDesign.src.ImageProcessing
         /// <returns></returns>
         private double GetDistance(System.Drawing.Point p1, System.Drawing.Point p2)
         {
-            Utils.ThrowIfNull(p1, p2);
+            Utils.ErrorIfNull(p1, p2);
 
             double diff1 = p1.X - p2.X;
             double diff2 = p1.Y - p2.Y;

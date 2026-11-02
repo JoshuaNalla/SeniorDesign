@@ -1,23 +1,22 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SeniorDesign.src
+namespace SeniorDesign.src;
+
+internal class Utils
 {
-    internal class Utils
+    /// <summary>
+    /// Throws an error if an object is null.
+    /// </summary>
+    /// <param name="args"></param>
+    public static void ErrorIfNull(params object[] args)
     {
-        /// <summary>
-        /// Throws an error if an object is null.
-        /// </summary>
-        /// <param name="args"></param>
-        public static void ErrorIfNull(params object[] args)
+        foreach (object arg in args)
         {
-            foreach (object arg in args)
-            {
-                ArgumentNullException.ThrowIfNull(arg);
-            }
+            ArgumentNullException.ThrowIfNull(arg);
         }
     }
 }

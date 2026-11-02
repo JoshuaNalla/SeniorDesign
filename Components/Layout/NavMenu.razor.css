@@ -1,0 +1,125 @@
+.top-nav-bar {
+    background-color: #171717;
+    width: 100%;
+    border-bottom: 1px solid #565656;
+}
+
+.navbar-toggler {
+    appearance: none;
+    cursor: pointer;
+    width: 3.5rem;
+    height: 2.5rem;
+    color: white;
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") no-repeat center/1.75rem rgba(255, 255, 255, 0.1);
+}
+
+.navbar-toggler:checked {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.top-row {
+    height: 3.5rem;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-item {
+    font-size: 01.2rem;
+    padding-bottom: 0.5rem;
+}
+
+.nav-item:first-of-type {
+    padding-top: 1rem;
+}
+
+.nav-item:last-of-type {
+    padding-bottom: 1rem;
+}
+
+.nav-item ::deep a {
+    color: #07F4FF;
+    border-radius: 4px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    line-height: 3rem;
+}
+
+.nav-item ::deep a.active {
+    color: #07F4FF;
+    text-decoration: underline;
+    text-decoration-color: #07F4FF;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 1px;
+}
+
+.nav-item ::deep a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #07F4FF;
+}
+
+.nav-scrollable {
+    display: none;
+}
+
+.navbar-toggler:checked~.nav-scrollable {
+    display: block;
+}
+
+@media (min-width: 641px) {
+    .top-nav-bar {
+        display: flex;
+        align-items: center;
+        background-color: #171717;
+    }
+
+    .top-row {
+        background-color: transparent;
+        min-width: 200px;
+    }
+
+    .navbar-toggler {
+        display: none;
+    }
+
+    .nav-scrollable {
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        height: auto;
+    }
+
+    .nav-menu {
+        flex-direction: row;
+        margin-bottom: 0;
+    }
+
+    .nav-item {
+        padding-bottom: 0;
+        padding-right: 0.5rem;
+    }
+
+    .nav-item:first-of-type {
+        padding-top: 0;
+    }
+
+    .nav-item:last-of-type {
+        padding-bottom: 0;
+    }
+
+    .navbar-toggler:checked~.nav-scrollable {
+        display: flex;
+    }
+}

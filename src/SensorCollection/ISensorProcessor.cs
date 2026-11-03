@@ -1,11 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SeniorDesign.src.SensorProcessing;
 
-internal interface ISensorProcessor
+internal interface ISensorProcessor : IDisposable 
 {
+    public static abstract ISensorProcessor Instance { get; }
+
     /// <summary>
     /// Connect to all sensors within bluetooth range.
     /// </summary>

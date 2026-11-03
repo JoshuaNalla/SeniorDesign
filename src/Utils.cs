@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +12,7 @@ internal class Utils
     /// Throws an error if an object is null.
     /// </summary>
     /// <param name="args"></param>
-    public static void ThrowIfNull(params object[] args)
+    public static void ErrorIfNull(params object[] args)
     {
         foreach (object arg in args)
         {

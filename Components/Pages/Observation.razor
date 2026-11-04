@@ -1,4 +1,7 @@
 ﻿@page "/"
+@using SeniorDesign.Components.Controls
+@using SeniorDesign.src.SensorProcessing
+@using SeniorDesign.src.SensorProcessing.XSens
 
 <h1>Observation Mode</h1>
 <div class="row">
@@ -17,6 +20,11 @@
         <span>Connected: @((isConnected ? "" : "Not ") + "Connected")</span>
     </div>
 </div>
+<div class="row">
+    <div class="col">
+        <NumberBox></NumberBox>
+    </div>
+</div>
 
 @code{
     private double velocity = 0.0;
@@ -33,6 +41,7 @@
 
     private void DoSensorConnection()
     {
-        
+        ISensorProcessor processor = XSensSensorProcessor.Instance;
+        processor.ConnectNearbySensors();
     }
 }

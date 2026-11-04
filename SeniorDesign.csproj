@@ -29,6 +29,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">24.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<Platforms>AnyCPU;x64</Platforms>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -65,6 +66,18 @@
         <PackageReference Include="ScottPlot.Blazor" Version="5.1.59" />
     </ItemGroup>
 
+	<ItemGroup>
+		<Reference Include="movelladot_pc_sdk_csharp64">
+			<HintPath>libs\movelladot_pc_sdk_csharp64.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+
+		<None Include="libs\*.dll">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Link>%(Filename)%(Extension)</Link>
+		</None>
+	</ItemGroup>
+	
     <ItemGroup>
       <Folder Include="DataAndDebug\Photos\" />
       <Folder Include="src\Data API\" />

@@ -1,11 +1,13 @@
 ﻿using MovellaDotPcSdk;
+using System.Runtime.InteropServices;
 
 namespace SeniorDesign.src.SensorProcessing.XSens
 {
     internal partial class XSensSensorProcessor : XsDotCallback, ISensorProcessor
     {
-        private XsDotConnectionManager Manager { get; set; } = new XsDotConnectionManager();
         private static XSensSensorProcessor _instance;
+        private XsDotConnectionManager Manager { get; }
+        private List<XsDotDevice> ConnectedBluetoothSensors { get; }
         public static ISensorProcessor Instance
         {
             get { return _instance ??= new XSensSensorProcessor(); }
@@ -13,35 +15,55 @@ namespace SeniorDesign.src.SensorProcessing.XSens
 
         private XSensSensorProcessor()
         {
-
+            Manager = new XsDotConnectionManager();
+            ConnectedBluetoothSensors = new List<XsDotDevice>();
+            Manager.addXsDotCallbackHandler(this);
         }
 
-        public void ConnectNearbySensors()
+        public async Task<bool> ConnectNearbySensorsAsync()
         {
+            //Detect one nearby Bluetooth sensor. Dies after 20 seconds.
+            //This needs to be updated to detect all sensors, not super difficult.
             Manager.enableDeviceDetection();
             int sensorCount = 0;
+            long starttime = XsTimeStamp.nowMs();
             do
             {
-                if (sensorCount != ConnectedSensors.Count)
+                if (sensorCount != DetectedBluetoothSensors.Count)
                 {
-                    Console.WriteLine($"Detected {ConnectedSensors.Count} sensors.");
-                    sensorCount = ConnectedSensors.Count;
+                    sensorCount = DetectedBluetoothSensors.Count;
                     break;
                 }
-            } while (true);
-
+            } while (XsTimeStamp.nowMs() - starttime < 20000);
             Manager.disableDeviceDetection();
-            //throw new NotImplementedException();
+
+            //Connect to all detected sensors.
+            XsDotDevice device;
+            foreach (XsPortInfo sensor in DetectedBluetoothSensors)
+            {
+                if (!Manager.openPort(sensor)) continue;        //This often fails. Need to figure out why
+                device = Manager.device(sensor.deviceId());
+                if (device == null) continue;
+                ConnectedBluetoothSensors.Add(device);
+            }
+
+            return ConnectedBluetoothSensors.Any();
         }
 
-        public void BeginDataLivestream()
+        public async Task<bool> BeginDataLivestreamAsync()
         {
             throw new NotImplementedException();
         }
 
-        public void DisconnectSensors()
+        public async Task<bool> DisconnectSensorsAsync()
         {
-            throw new NotImplementedException();
+            //This should be replaced with actual disconnect logic, but I couldn't find it
+            foreach (XsDotDevice device in ConnectedBluetoothSensors)
+            {
+                device.powerOff();
+            }
+            ConnectedBluetoothSensors.Clear();
+            return true;
         }
 
         #region [ button ]
@@ -59,8 +81,11 @@ namespace SeniorDesign.src.SensorProcessing.XSens
             }
             private set
             {
-                IsNewButton = true;
-                field = value;
+                lock (_buttonLock)
+                {
+                    IsNewButton = true;
+                    field = value;
+                }
             }
         }
 
@@ -71,11 +96,18 @@ namespace SeniorDesign.src.SensorProcessing.XSens
         /// <param name="timestamp"></param>
         protected override void onButtonClicked(XsDotDevice dev, uint timestamp)
         {
-            lock (_buttonLock)
-            {
-                ButtonTimestamp = timestamp;
-            }
+            ButtonTimestamp = timestamp;
         }
+        #endregion
+
+        #region [ device state ]
+
+        protected override void onDeviceStateChanged(XsDotDevice dev, XsDeviceState newState, XsDeviceState oldState)
+        {
+            if (newState == XsDeviceState.XDS_Destructing)
+                ConnectedBluetoothSensors.Remove(dev);
+        }
+
         #endregion
 
         #region [ packets ]
@@ -107,25 +139,13 @@ namespace SeniorDesign.src.SensorProcessing.XSens
         #endregion
 
         #region [ advertisement ]
-        private readonly Lock _advertisementLock = new Lock();
-        private List<XsPortInfo> ConnectedSensors
-        {
-            get
-            {
-                lock (_advertisementLock)
-                {
-                    return field;
-                }
-            }
-        } = new List<XsPortInfo>();
+        private List<XsPortInfo> DetectedBluetoothSensors { get; } = new List<XsPortInfo>();
 
         protected override void onAdvertisementFound(XsPortInfo portInfo)
         {
             Utils.ErrorIfNull(portInfo);
-            lock (_advertisementLock)
-            {
-                ConnectedSensors.Add(portInfo);
-            }
+            if (portInfo.isBluetooth())
+                DetectedBluetoothSensors.Add(portInfo);
         }
         #endregion
     }

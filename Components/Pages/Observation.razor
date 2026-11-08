@@ -39,9 +39,9 @@
         }
     }
 
-    private void DoSensorConnection()
+    private async void DoSensorConnection()
     {
         ISensorProcessor processor = XSensSensorProcessor.Instance;
-        processor.ConnectNearbySensors();
+        isConnected = await processor.ConnectNearbySensorsAsync();
     }
 }

@@ -11,15 +11,15 @@ internal interface ISensorProcessor : IDisposable
     /// <summary>
     /// Connect to all sensors within bluetooth range.
     /// </summary>
-    public void ConnectNearbySensors();
+    public Task<bool> ConnectNearbySensorsAsync();
 
     /// <summary>
     /// Begin live data streaming from sensors.
     /// </summary>
-    public void BeginDataLivestream();
+    public Task<bool> BeginDataLivestreamAsync();
 
     /// <summary>
     /// Disconnect from all connected sensors.
     /// </summary>
-    public void DisconnectSensors();
+    public Task<bool> DisconnectSensorsAsync();
 }

@@ -1,7 +1,9 @@
 .top-nav-bar {
-    background-color: #171717;
+    position: relative;
     width: 100%;
-    border-bottom: 1px solid #565656;
+    background-color: var(--nav-bg);
+    border-bottom: 1px solid var(--nav-border);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .navbar-toggler {
@@ -9,25 +11,28 @@
     cursor: pointer;
     width: 3.5rem;
     height: 2.5rem;
-    color: white;
+    color: var(--nav-text);
     position: absolute;
     top: 0.5rem;
     right: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") no-repeat center/1.75rem rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--nav-toggler-border);
+    background: var(--nav-toggler-bg) var(--nav-toggler-icon) no-repeat center/1.75rem;
+    border-radius: 4px;
 }
 
 .navbar-toggler:checked {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: var(--nav-toggler-active-bg);
 }
 
 .top-row {
     height: 3.5rem;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: transparent;
 }
 
 .navbar-brand {
     font-size: 1.8rem;
+    color: var(--nav-brand);
+    font-weight: 600;
 }
 
 .nav-menu {
@@ -36,7 +41,7 @@
 }
 
 .nav-item {
-    font-size: 01.2rem;
+    font-size: 1.2rem;
     padding-bottom: 0.5rem;
 }
 
@@ -49,25 +54,26 @@
 }
 
 .nav-item ::deep a {
-    color: #07F4FF;
+    color: var(--nav-link);
     border-radius: 4px;
     height: 3rem;
     display: flex;
     align-items: center;
     line-height: 3rem;
+    transition: color 0.15s ease, background-color 0.15s ease;
 }
 
 .nav-item ::deep a.active {
-    color: #07F4FF;
+    color: var(--nav-link-active);
     text-decoration: underline;
-    text-decoration-color: #07F4FF;
+    text-decoration-color: var(--nav-link-active);
     text-underline-offset: 6px;
-    text-decoration-thickness: 1px;
+    text-decoration-thickness: 2px;
 }
 
 .nav-item ::deep a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #07F4FF;
+    background-color: var(--nav-hover-bg);
+    color: var(--nav-link-hover);
 }
 
 .nav-scrollable {
@@ -78,11 +84,17 @@
     display: block;
 }
 
+.theme-switcher-wrapper {
+    position: absolute;
+    top: 0.55rem;
+    right: 5rem;
+    z-index: 10;
+}
+
 @media (min-width: 641px) {
     .top-nav-bar {
         display: flex;
         align-items: center;
-        background-color: #171717;
     }
 
     .top-row {
@@ -121,5 +133,11 @@
 
     .navbar-toggler:checked~.nav-scrollable {
         display: flex;
+    }
+
+    .theme-switcher-wrapper {
+        position: static;
+        margin-left: auto;
+        padding-right: 1.5rem;
     }
 }

@@ -1,6 +1,7 @@
 .top-nav-bar {
     position: relative;
     width: 100%;
+    min-height: 80px;
     background-color: var(--nav-bg);
     border-bottom: 1px solid var(--nav-border);
     transition: background-color 0.2s ease, border-color 0.2s ease;
@@ -30,7 +31,7 @@
 }
 
 .navbar-brand {
-    font-size: 2.0rem;
+    font-size: 2.5rem;
     color: var(--nav-brand);
     font-weight: 700;
 
@@ -48,7 +49,7 @@
 }
 
 .nav-item {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     padding-bottom: 0.5rem;
 }
 
@@ -62,8 +63,9 @@
 
 .nav-item ::deep a {
     color: var(--nav-link);
-    border-radius: 4px;
-    height: 3rem;
+    border-radius: 6px;
+    height: 3.5rem;
+    padding: 0 1.25rem;
     display: flex;
     align-items: center;
     line-height: 3rem;
@@ -102,6 +104,7 @@
     .top-nav-bar {
         display: flex;
         align-items: center;
+        height: 85px;
     }
 
     .top-row {
@@ -115,8 +118,9 @@
 
     .nav-scrollable {
         display: flex;
-        flex: 1;
-        justify-content: center;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
         height: auto;
     }
 

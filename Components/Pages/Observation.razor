@@ -1,47 +1,19 @@
-﻿@page "/"
-@using SeniorDesign.Components.Controls
-@using SeniorDesign.src.SensorProcessing
-@using SeniorDesign.src.SensorProcessing.XSens
+@page "/"
 
-<h1>Observation Mode</h1>
-<div class="row">
-    <div class="col">
-        <button class="btn btn-primary" @onclick="DoImageProcessing">Do Image Processing</button>
-    </div>
-    <div class="col">
-        <span>Velocity: @(velocity)</span>
-    </div>
-</div>
-<div class="row">
-    <div class="col">
-        <button class="btn btn-primary" @onclick="DoSensorConnection">Do Sensor Connection</button>
-    </div>
-    <div class="col">
-        <span>Connected: @((isConnected ? "" : "Not ") + "Connected")</span>
-    </div>
-</div>
-<div class="row">
-    <div class="col">
-        <NumberBox></NumberBox>
+<div class="observation-container">
+    <div class="observation-grid">
+        <div class="observation-box camera"></div>
+        <div class="observation-box sensor-placement"></div>
+
+        <div class="observation-box mid-1"></div>
+        <div class="observation-box mid-2"></div>
+        <div class="observation-box mid-3"></div>
+        <div class="observation-box mid-4"></div>
+        <div class="observation-box mid-5"></div>
+        <div class="observation-box mid-6"></div>
+        <div class="observation-box session"></div>
+        <div class="observation-box session-actions"></div>
     </div>
 </div>
 
-@code{
-    private double velocity = 0.0;
-    private bool isConnected = false;
-
-    private void DoImageProcessing()
-    {
-        using (VideoCapture capture = new(@"C:\Users\mitch\source\repos\SeniorDesign\DataAndDebug\videoplayback2.mp4"))
-        {
-            IImageProcessor processor = new ImageProcessor();
-            velocity = processor.GetBallSpeed(capture);
-        }
-    }
-
-    private async void DoSensorConnection()
-    {
-        ISensorProcessor processor = XSensSensorProcessor.Instance;
-        isConnected = await processor.ConnectNearbySensorsAsync();
-    }
-}
+@code { }

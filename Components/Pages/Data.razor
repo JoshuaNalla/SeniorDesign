@@ -1,8 +1,32 @@
 ﻿@page "/data"
+@using SeniorDesign.src.SensorProcessing
+@using SeniorDesign.src.SensorProcessing.XSens
 
 <h1>Data</h1>
 
 <p>This component demonstrates showing data.</p>
+
+<div class="row">
+    <div class="col">
+        <button class="btn btn-primary" @onclick="DoImageProcessing">Do Image Processing</button>
+    </div>
+    <div class="col">
+        <span>Velocity: @(velocity)</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <button class="btn btn-primary" @onclick="DoSensorConnection">Do Sensor Connection</button>
+    </div>
+    <div class="col">
+        <span>Connected: @((isConnected ? "" : "Not ") + "Connected")</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <NumberBox></NumberBox>
+    </div>
+</div>
 
 @if (forecasts == null)
 {
@@ -57,5 +81,23 @@ else
         public int TemperatureC { get; set; }
         public string? Summary { get; set; }
         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
+
+    private double velocity = 0.0;
+    private bool isConnected = false;
+
+    private void DoImageProcessing()
+    {
+        using (VideoCapture capture = new(@"C:\Users\mitch\source\repos\SeniorDesign\DataAndDebug\videoplayback2.mp4"))
+        {
+            IImageProcessor processor = new ImageProcessor();
+            velocity = processor.GetBallSpeed(capture);
+        }
+    }
+
+    private async void DoSensorConnection()
+    {
+        ISensorProcessor processor = XSensSensorProcessor.Instance;
+        isConnected = await processor.ConnectNearbySensorsAsync();
     }
 }

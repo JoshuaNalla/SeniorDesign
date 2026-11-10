@@ -1,10 +1,20 @@
 ﻿@page "/coaching"
 
-<h1>Coaching Mode</h1>
+<div class="coaching-container">
+    <div class="coaching-grid">
+        <div class="coaching-box camera"></div>
+        <div class="coaching-box sensor-placement"></div>
 
-<p role="status">Current count: @currentCount</p>
-
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+        <div class="coaching-box mid-1"></div>
+        <div class="coaching-box mid-2"></div>
+        <div class="coaching-box mid-3"></div>
+        <div class="coaching-box mid-4"></div>
+        <div class="coaching-box mid-5"></div>
+        <div class="coaching-box mid-6"></div>
+        <div class="coaching-box session"></div>
+        <div class="coaching-box session-actions"></div>
+    </div>
+</div>
 
 @code {
     private int currentCount = 0;

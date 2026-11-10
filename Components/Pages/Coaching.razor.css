@@ -1,0 +1,113 @@
+.coaching-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: calc(100vh - 110px);
+    padding: 0.5rem 0 1.25rem 0;
+    box-sizing: border-box;
+}
+
+.coaching-grid {
+    display: grid;
+    flex: 1;
+    width: 100%;
+    gap: 1.25rem;
+    grid-template-columns: 1.6fr 2.0fr 3.4fr 2.0fr;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas:
+        "camera camera  mid3   session"
+        "camera camera  mid4   session"
+        "sensor mid1    mid5   session"
+        "sensor mid2    mid6   actions";
+    box-sizing: border-box;
+}
+
+.coaching-box {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Grid Area mappings */
+.camera {
+    grid-area: camera;
+    min-height: 260px;
+}
+
+.sensor-placement {
+    grid-area: sensor;
+    min-height: 260px;
+}
+
+.mid-1 {
+    grid-area: mid1;
+    min-height: 120px;
+}
+
+.mid-2 {
+    grid-area: mid2;
+    min-height: 120px;
+}
+
+.mid-3 {
+    grid-area: mid3;
+    min-height: 120px;
+}
+
+.mid-4 {
+    grid-area: mid4;
+    min-height: 120px;
+}
+
+.mid-5 {
+    grid-area: mid5;
+    min-height: 120px;
+}
+
+.mid-6 {
+    grid-area: mid6;
+    min-height: 120px;
+}
+
+.session {
+    grid-area: session;
+    min-height: 400px;
+}
+
+.session-actions {
+    grid-area: actions;
+    min-height: 120px;
+}
+
+/* Responsive collapse on smaller screens */
+@media (max-width: 900px) {
+    .coaching-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "camera camera"
+            "sensor ath"
+            "sensor athsub"
+            "params live"
+            "mid3   mid4"
+            "session session"
+            "status  status";
+    }
+
+    .box-session {
+        min-height: 250px;
+    }
+}
+
+@media (max-width: 600px) {
+    .coaching-grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .box-sensor-placement {
+        min-height: 200px;
+    }
+}

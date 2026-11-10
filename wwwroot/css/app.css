@@ -1,4 +1,24 @@
+@font-face {
+    font-family: 'TitleFont';
+    src: url('../fonts/Oswald-VariableFont_wght.ttf') format('truetype');
+    font-weight: 200 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PrimaryFont';
+    src: url('../fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
+    font-weight: 200 700;
+    font-style: normal;
+}
+
+:root {
+    --font-title: 'TitleFont', sans-serif;
+    --font-primary: 'PrimaryFont', sans-serif;
+}
+
 :root, [data-bs-theme="light"] {
+    /* Navbar colors */
     --nav-bg: #f2f2f2;
     --nav-border: #c7c8c9;
     --nav-text: #212529;
@@ -12,10 +32,20 @@
     --nav-toggler-bg: rgba(0, 0, 0, 0.05);
     --nav-toggler-active-bg: rgba(0, 0, 0, 0.15);
     --nav-toggler-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.65%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+
+    /* Body colors */
+    --bs-body-bg: #f2f2f2;
+    --header-text: #212529;
+    --primary-text: #212529;
+
+    /* Card colors */
+    --card-bg: #e9ecef;
+    --card-border: #ced4da;
 }
 
 [data-bs-theme="dark"] {
-    --nav-bg: #171717;
+    /* Navbar colors */
+    --nav-bg: #0f0f0f;
     --nav-border: #383838;
     --nav-text: #ffffff;
     --nav-brand: #d4d4d4;
@@ -28,6 +58,15 @@
     --nav-toggler-bg: rgba(255, 255, 255, 0.1);
     --nav-toggler-active-bg: rgba(255, 255, 255, 0.25);
     --nav-toggler-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.65%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    
+    /* Body colors */
+    --bs-body-bg: #171717;
+    --header-text: #aeaeae;
+    --primary-text: #aeaeae;
+
+    /* Card colors */
+    --card-bg: #222222;
+    --card-border: #2f2f2f;
 }
 
 html, body {

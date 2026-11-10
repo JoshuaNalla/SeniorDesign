@@ -36,3 +36,11 @@
     grid-area: sessions;
     min-height: 400px
 }
+
+.grid-label {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: larger;
+    padding: 10px 10px 0px 20px;
+    color: var(--primary-text);
+}

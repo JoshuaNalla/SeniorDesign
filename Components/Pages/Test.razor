@@ -1,0 +1,72 @@
+@page "/test"
+@using SeniorDesign.src.SensorProcessing
+@using SeniorDesign.src.SensorProcessing.XSens
+
+<h2>Test Area</h2>
+
+<div class="row">
+    <div class="col">
+        <button class="btn btn-primary" @onclick="DoImageProcessing">Do Image Processing</button>
+    </div>
+    <div class="col">
+        <span>Velocity: @(velocity)</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <button class="btn btn-primary" @onclick="DoSensorConnection">Do Sensor Connection</button>
+    </div>
+    <div class="col">
+        <span>Connected: @((isConnected ? "" : "Not ") + "Connected")</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <NumberBox></NumberBox>
+    </div>
+</div>
+
+@code {
+    private WeatherForecast[]? forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Simulate asynchronous loading to demonstrate a loading indicator
+        await Task.Delay(500);
+
+        var startDate = DateOnly.FromDateTime(DateTime.Now);
+        var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
+        forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        {
+            Date = startDate.AddDays(index),
+            TemperatureC = Random.Shared.Next(-20, 55),
+            Summary = summaries[Random.Shared.Next(summaries.Length)]
+        }).ToArray();
+    }
+
+    private class WeatherForecast
+    {
+        public DateOnly Date { get; set; }
+        public int TemperatureC { get; set; }
+        public string? Summary { get; set; }
+        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
+
+    private double velocity = 0.0;
+    private bool isConnected = false;
+
+    private void DoImageProcessing()
+    {
+        using (VideoCapture capture = new(@"C:\Users\mitch\source\repos\SeniorDesign\DataAndDebug\videoplayback2.mp4"))
+        {
+            IImageProcessor processor = new ImageProcessor();
+            velocity = processor.GetBallSpeed(capture);
+        }
+    }
+
+    private async void DoSensorConnection()
+    {
+        ISensorProcessor processor = XSensSensorProcessor.Instance;
+        isConnected = await processor.ConnectNearbySensorsAsync();
+    }
+}

@@ -1,0 +1,38 @@
+.data-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: calc(100vh - 110px);
+    padding: 0.5rem 0 1.25rem 0;
+    box-sizing: border-box;
+}
+
+.data-grid {
+    display: grid;
+    flex: 1;
+    width: 100%;
+    gap: 1.25rem;
+    grid-template-columns: 4.5fr 4.5fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+        "users sessions";
+    box-sizing: border-box;
+}
+
+.data-box {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.users {
+    grid-area: users;
+    min-height: 400px;
+}
+
+.sessions {
+    grid-area: sessions;
+    min-height: 400px
+}

@@ -30,16 +30,6 @@
     transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-[data-bs-theme="light"] .observation-box {
-    background-color: #e9ecef;
-    border-color: #ced4da;
-}
-
-[data-bs-theme="dark"] .observation-box {
-    background-color: #222222;
-    border-color: #2f2f2f;
-}
-
 /* Grid Area mappings */
 .camera {
     grid-area: camera;

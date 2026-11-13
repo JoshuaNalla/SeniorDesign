@@ -59,10 +59,10 @@ namespace SeniorDesign.src.SensorProcessing.XSens
             }
 
             //Synchronize all sensors.
-            XsDotDevice root = ConnectedBluetoothSensors.FirstOrDefault();
-            foreach (XsDotDevice device in ConnectedBluetoothSensors)
+            XsDotDevice? root = ConnectedBluetoothSensors.FirstOrDefault();
+            foreach (XsDotDevice device in ConnectedBluetoothSensors.Skip(1))
             {
-                device.startSync(root.bluetoothAddress());
+                device.startSync(root!.bluetoothAddress());
             }
 
             return ConnectedBluetoothSensors.Any();

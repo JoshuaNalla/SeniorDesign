@@ -9,9 +9,10 @@ namespace SeniorDesign.src.SensorCollection.XSens
     {
         public static SensorDataPacket TransmutePacket(XsDataPacket packet)
         {
+            Utils.ErrorIfNull(packet);
             return new SensorDataPacket
             {
-                SensorID = packet.deviceId().ToString(),
+                SensorID = packet.deviceId()?.ToString() ?? string.Empty,
                 SampleTime = XSensSensorUtils.DateTimeFromTimeInfo(packet.estimatedTimeOfSampling().toTimeInfo()),
                 ArrivalTime = XSensSensorUtils.DateTimeFromTimeInfo(packet.timeOfArrival().toTimeInfo())
             };

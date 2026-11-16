@@ -12,9 +12,9 @@ internal class Utils
     /// Throws an error if an object is null.
     /// </summary>
     /// <param name="args"></param>
-    public static void ErrorIfNull(params object[] args)
+    public static void ErrorIfNull(params object?[] args)
     {
-        foreach (object arg in args)
+        foreach (object? arg in args)
         {
             ArgumentNullException.ThrowIfNull(arg);
         }

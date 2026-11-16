@@ -7,18 +7,27 @@ namespace SeniorDesign.src.SensorCollection.XSens
 {
     internal class XSensSensorUtils
     {
-        public static SensorDataPacket TransmutePacket(XsDataPacket packet)
+        public static SensorDataPacket TransmutePacket(XsDataPacket? packet)
         {
-            Utils.ErrorIfNull(packet);
+            XsEuler? orientation = packet?.orientationEuler();
+            XsVector? acceleration = packet?.freeAcceleration();
+            Utils.ErrorIfNull(packet, orientation, acceleration);
+
             return new SensorDataPacket
             {
                 SensorID = packet.deviceId()?.ToString() ?? string.Empty,
-                SampleTime = XSensSensorUtils.DateTimeFromTimeInfo(packet.estimatedTimeOfSampling().toTimeInfo()),
-                ArrivalTime = XSensSensorUtils.DateTimeFromTimeInfo(packet.timeOfArrival().toTimeInfo())
+                SampleTime = XSensSensorUtils.DateTimeFromSensorTime(packet.estimatedTimeOfSampling().toTimeInfo()),
+                ArrivalTime = XSensSensorUtils.DateTimeFromSensorTime(packet.timeOfArrival().toTimeInfo()),
+                Roll = orientation.roll(),
+                Pitch = orientation.pitch(),
+                Yaw = orientation.yaw(),
+                AccelerationX = acceleration.value(0),
+                AccelerationY = acceleration.value(1),
+                AccelerationZ = acceleration.value(2)
             };
         }
 
-        private static DateTime DateTimeFromTimeInfo(XsTimeInfo timeinfo)
+        private static DateTime DateTimeFromSensorTime(XsTimeInfo timeinfo)
         {
             DateTime time = new DateTime(
                 year: timeinfo.m_year,

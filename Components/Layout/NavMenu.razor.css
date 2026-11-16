@@ -1,6 +1,4 @@
 .top-nav-bar {
-    position: relative;
-    width: 100%;
     min-height: 80px;
     background-color: var(--nav-bg);
     border-bottom: 1px solid var(--nav-border);
@@ -13,12 +11,10 @@
     width: 3.5rem;
     height: 2.5rem;
     color: var(--nav-text);
-    position: absolute;
     top: 0.5rem;
     right: 1rem;
     border: 1px solid var(--nav-toggler-border);
     background: var(--nav-toggler-bg) var(--nav-toggler-icon) no-repeat center/1.75rem;
-    border-radius: 4px;
 }
 
 .navbar-toggler:checked {
@@ -27,51 +23,30 @@
 
 .top-row {
     height: 3.5rem;
-    background-color: transparent;
 }
 
 .navbar-brand {
     font-size: 2.5rem;
     color: var(--nav-brand);
     font-family: var(--font-title);
-    font-weight: 700;
-    display: inline-flex;
-    align-items: center;
-    padding-top: 0;
-    padding-bottom: 0;
-    line-height: 1;
-    height: 100%;
 }
 
 .nav-menu {
-    display: flex;
     flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 0;
 }
 
 .nav-item {
     font-size: 1.6rem;
-    padding-bottom: 0.5rem;
-}
-
-.nav-item:first-of-type {
-    padding-top: 1rem;
-}
-
-.nav-item:last-of-type {
-    padding-bottom: 1rem;
 }
 
 .nav-item ::deep a {
     color: var(--nav-link);
     font-family: var(--font-title);
-    font-weight: 400;
-    border-radius: 6px;
     height: 3.5rem;
     padding: 0 1.25rem;
-    display: flex;
-    align-items: center;
     line-height: 3rem;
-    transition: color 0.15s ease, background-color 0.15s ease;
 }
 
 .nav-item ::deep a.active {
@@ -110,7 +85,6 @@
     }
 
     .top-row {
-        background-color: transparent;
         min-width: 200px;
     }
 
@@ -118,34 +92,18 @@
         display: none;
     }
 
-    .nav-scrollable {
+    .nav-scrollable,
+    .navbar-toggler:checked~.nav-scrollable {
         display: flex;
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        height: auto;
     }
 
     .nav-menu {
         flex-direction: row;
-        margin-bottom: 0;
-    }
-
-    .nav-item {
-        padding-bottom: 0;
-        padding-right: 0.5rem;
-    }
-
-    .nav-item:first-of-type {
-        padding-top: 0;
-    }
-
-    .nav-item:last-of-type {
-        padding-bottom: 0;
-    }
-
-    .navbar-toggler:checked~.nav-scrollable {
-        display: flex;
+        gap: 0;
+        padding: 0;
     }
 
     .theme-switcher-wrapper {

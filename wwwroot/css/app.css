@@ -159,6 +159,18 @@ main {
     flex-direction: column;
 }
 
+.page-fill {
+    min-height: calc(100vh - 110px);
+    padding-bottom: 1.25rem;
+}
+
+.card {
+    --bs-card-bg: var(--card-bg);
+    --bs-card-border-color: var(--card-border);
+    --bs-card-border-radius: 12px;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
 /* Theme Switcher */
 .theme-switcher-wrapper #bb-theme-text,
 .theme-switcher-wrapper small {
